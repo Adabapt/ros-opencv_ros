@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="namespace" default="opencv_ros" />
+
+  <group ns="$(arg namespace)">
+    <node pkg="opencv_ros" type="opencv_ros_node.py" name="opencv_ros_node_py" output="screen"/>
+  </group>
+
+</launch>
