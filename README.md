@@ -16,7 +16,8 @@ Faire source devel/setup.bash
 ## Fonctionnements:
 
 On lance la node avec :  
-Roslaunch opencv_ros opencv_ros_node.launch  
+Roslaunch opencv_ros opencv_ros_node.launch node_name:="opencv_ros" topic_src:="/h264toraw/image_raw" topic_dest:="/opencv_ros/img"  
+par exemple  
 
 Le package initialise donc le topic publisher et subscriber.  
 Dès qu'il reçoit une image sur le topic subscriber il la traduit au format d'OpenCV grâce à CV_Bridge.  
@@ -27,3 +28,4 @@ Enfin, on retraduit l'image au format de ROS grâce à CV_Bridge et on la publie
 
 Lien Github vers CV_Bridge :  
 http://wiki.ros.org/vision_opencv?distro=noetic
+

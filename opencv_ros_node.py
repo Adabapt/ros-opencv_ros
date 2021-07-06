@@ -11,16 +11,22 @@ from std_msgs.msg import String
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 
+################PARAMETERS####################
+
+node_name = str(rospy.get_param('node_name'))
+topic_src = str(rospy.get_param('topic_src'))
+topic_dest = str(rospy.get_param('topic_dest'))
+
 ################IMAGE CONVERTER CLASS####################
 
 class image_converter:
 
 	#initialisation du topic de source et de sortie
 	def __init__(self):
-		self.image_pub = rospy.Publisher("/opencv_ros/img",Image, queue_size=1, latch=False)
+		self.image_pub = rospy.Publisher(topic_dest,Image, queue_size=1, latch=False)
 
 		self.bridge = CvBridge()
-		self.image_sub = rospy.Subscriber("/h264toraw/image_raw",Image,self.callback)
+		self.image_sub = rospy.Subscriber(topic_src,Image,self.callback)
 		print("node init")
 
 	#fonction qui traite l'image reçu sur le subscriber
@@ -74,7 +80,7 @@ def code_decoder(img):
 
 def main(args):
 	ic = image_converter()
-	rospy.init_node('image_converter', anonymous=True)
+	rospy.init_node(node_name, anonymous=True)
 	try:
 		rospy.spin()
 	except KeyboardInterrupt:
